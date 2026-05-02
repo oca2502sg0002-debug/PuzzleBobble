@@ -9,7 +9,13 @@ const int POS_Y = WINDOW_HEIGHT - 25;
 
 double angle = PI / 2.0f;
 
-Ball ball;
+void Ball::Init()
+{
+	// ボールの初期設定
+	ball.pos.x = WINDOW_WIDTH / 2;
+	ball.pos.y = WINDOW_HEIGHT - 50;
+	ball.mode = false;
+}
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -33,10 +39,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	player.pos.x = POS_X;
 	player.pos.y = POS_Y;
 
-	// ボールの初期設定
-	ball.pos.x = WINDOW_WIDTH / 2;
-	ball.pos.y = WINDOW_HEIGHT - 50;
-	ball.mode = false;
+	ball.Init();
+	
 
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
@@ -67,15 +71,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			ball.pos.x += ball.vx;
 			// マイナス値の理由、プラス値だと、反対に跳び下方向に跳ぶためマイナス値で、上に上がるため。
 			ball.pos.y += ball.vy;
-			// 2. 左右の壁の判定 (画面幅を 640 と想定)
-			if (ball.pos.x < 0 || ball.pos.x > WINDOW_WIDTH) {
-				ball.pos.x *= -1; // X方向の移動向きを反転
-			}
 		}
 
 		if (ball.pos.y <= -20.0) {
 			ball.mode = false;
-
+			ball.Init();
 		}
 
 		//---------------------------------------

@@ -19,6 +19,7 @@ public:
 	float vx;
 	float vy;
 
+	void Init();
 };
 Ball ball;
 
