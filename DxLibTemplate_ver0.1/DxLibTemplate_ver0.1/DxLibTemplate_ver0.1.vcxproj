@@ -154,7 +154,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="keyManager.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="main2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="const.h" />
